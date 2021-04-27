@@ -1,20 +1,20 @@
-gti
+ivm
 ===
 
-Just a silly `git` launcher, basically. Inspired by `sl`.
+Just a silly `vim` launcher, basically. Inspired by `sl`.
 
 Build and Install
 -----------------
 
 From a package system:
-* [Fedora](https://src.fedoraproject.org/rpms/gti)
-* it's in ArchLinux' AUR as [gti-git](https://aur.archlinux.org/packages/gti-git/) and as [gti](https://aur.archlinux.org/packages/gti/)
-* [Gentoo](https://packages.gentoo.org/packages/dev-vcs/gti)
-* [Nix/NixOS](https://search.nixos.org/packages?show=gti&query=gti)
-* [FreeBSD ports](http://svnweb.freebsd.org/ports/head/games/gti/)
-* [OpenBSD ports](http://openports.se/games/gti)
-* [Homebrew/MacOS X](https://formulae.brew.sh/formula/gti#default)
-* [Cygwin](https://cygwin.com/packages/summary/gti.html)
+* [Fedora](https://src.fedoraproject.org/rpms/ivm)
+* it's in ArchLinux' AUR as [ivm-vim](https://aur.archlinux.org/packages/ivm-vim/) and as [ivm](https://aur.archlinux.org/packages/ivm/)
+* [Gentoo](https://packages.gentoo.org/packages/dev-vcs/ivm)
+* [Nix/NixOS](https://search.nixos.org/packages?show=ivm&query=ivm)
+* [FreeBSD ports](http://svnweb.freebsd.org/ports/head/games/ivm/)
+* [OpenBSD ports](http://openports.se/games/ivm)
+* [Homebrew/MacOS X](https://formulae.brew.sh/formula/ivm#default)
+* [Cygwin](https://cygwin.com/packages/summary/ivm.html)
 
 From source:
 
@@ -23,15 +23,15 @@ From source:
 
 The default install PREFIX is `/usr/bin`.
 
-You can change the speed of the car at runtime via `GTI_SPEED`.
+You can change the speed of the car at runtime via `IVM_SPEED`.
 For example:
 
-    $ GTI_SPEED=2000 gti push # default is 1000
+    $ IVM_SPEED=2000 ivm push # default is 1000
 
 Usage
 -----
 
-Try typing `git` really fast, on an unfamiliar keyboard.
+Try typing `vim` really fast, on an unfamiliar keyboard.
 
 Author and License
 ------------------

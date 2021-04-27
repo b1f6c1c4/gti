@@ -1,5 +1,5 @@
 /*
- * gti - a git launcher
+ * ivm - a vim launcher
  *
  * Copyright 2012 by Richard Wossal <richard@r-wos.org>
  *
@@ -33,9 +33,9 @@
 #    define usleep(a) Sleep((a) / 1000)
 
     /*
-     * exec*() on MSVC makes the parent process exit; that means that gti.exe will finish as git is starting,
-     * which causes cmd.exe to print its prompt over git's output (because it sees that the child process has
-     * finished). The solution is to use synchronous spawn*(): it will make gti.exe to wait until git finishes.
+     * exec*() on MSVC makes the parent process exit; that means that ivm.exe will finish as vim is starting,
+     * which causes cmd.exe to print its prompt over vim's output (because it sees that the child process has
+     * finished). The solution is to use synchronous spawn*(): it will make ivm.exe to wait until vim finishes.
      */
 #    define execv(a, b) do { i = _spawnv(_P_WAIT, (a), (b)); if (i != -1) return i; } while(0)
 #    define execvp(a, b) do { i = _spawnvp(_P_WAIT, (a), (b)); if (i != -1) return i; } while(0)
@@ -56,10 +56,10 @@ HANDLE WIN_CONSOLE;
 #    include <sys/termios.h>
 #endif
 
-#define GIT_NAME "git"
+#define VIM_NAME "vim"
 
-#ifndef GTI_SPEED
-#    define GTI_SPEED 1000
+#ifndef IVM_SPEED
+#    define IVM_SPEED 1000
 #endif
 
 int term_width(void);
@@ -83,18 +83,18 @@ unsigned int FRAME_TIME;
 int main(int argc, char **argv)
 {
     int i;
-    char *git_path;
+    char *vim_path;
     char *tmp;
-    unsigned int gti_speed;
+    unsigned int ivm_speed;
     draw_fn_t draw_fn;
 
-    tmp = getenv("GTI_SPEED");
-    if (!tmp || sscanf(tmp, "%u", &gti_speed) != 1) {
-        gti_speed = GTI_SPEED;
+    tmp = getenv("IVM_SPEED");
+    if (!tmp || sscanf(tmp, "%u", &ivm_speed) != 1) {
+        ivm_speed = IVM_SPEED;
     }
     open_term();
     TERM_WIDTH = term_width();
-    FRAME_TIME = 1000 * 1000 * 10 / (gti_speed + TERM_WIDTH + 1);
+    FRAME_TIME = 1000 * 1000 * 10 / (ivm_speed + TERM_WIDTH + 1);
 
     draw_fn = select_command(argc, argv);
     init_space();
@@ -104,14 +104,14 @@ int main(int argc, char **argv)
     move_to_top();
     fflush(TERM_FH);
 
-    git_path = getenv("GIT");
-    if (git_path) {
-        execv(git_path, argv);
+    vim_path = getenv("VIM");
+    if (vim_path) {
+        execv(vim_path, argv);
     } else {
-        execvp(GIT_NAME, argv);
+        execvp(VIM_NAME, argv);
     }
     /* error in exec if we land here */
-    perror(GIT_NAME);
+    perror(VIM_NAME);
     return 1;
 }
 
@@ -220,7 +220,7 @@ void draw_std(int x)
     line_at(x, "   ,---------------.");
     line_at(x, "  /  /``````|``````\\\\");
     line_at(x, " /  /_______|_______\\\\________");
-    line_at(x, "|]      GTI |'       |        |]");
+    line_at(x, "|]      IVM |'       |        |]");
     if (x % 2) {
     line_at(x, "=  .-:-.    |________|  .-:-.  =");
     line_at(x, " `  -+-  --------------  -+-  '");
@@ -244,7 +244,7 @@ void draw_push(int x)
     line_at(x, "   __      ,---------------.");
     line_at(x, "  /--\\   /  /``````|``````\\\\");
     line_at(x, "  \\__/  /  /_______|_______\\\\________");
-    line_at(x, "   ||-< |]      GTI |'       |        |]");
+    line_at(x, "   ||-< |]      IVM |'       |        |]");
     if (x % 2) {
     line_at(x, "   ||-< =  .-:-.    |________|  .-:-.  =");
     line_at(x, "   ||    `  -+-  --------------  -+-  '");
@@ -268,7 +268,7 @@ void draw_pull(int x)
     line_at(x, "   ,---------------.               __");
     line_at(x, "  /  /``````|``````\\\\             /--\\");
     line_at(x, " /  /_______|_______\\\\________    \\__/");
-    line_at(x, "|]      GTI |'       |        |] >-||");
+    line_at(x, "|]      IVM |'       |        |] >-||");
     if (x % 2) {
     line_at(x, "=  .-:-.    |________|  .-:-.  = >-||");
     line_at(x, " `  -+-  --------------  -+-  '    || ");
