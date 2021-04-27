@@ -71,9 +71,6 @@ void clear_car(int x);
 
 typedef void (*draw_fn_t) (int x);
 void draw_std(int x);
-void draw_push(int x);
-void draw_pull(int x);
-void draw_tag(int x);
 draw_fn_t select_command(int argc, char **argv);
 
 FILE *TERM_FH;
@@ -117,19 +114,6 @@ int main(int argc, char **argv)
 
 draw_fn_t select_command(int argc, char **argv)
 {
-    int i;
-
-    for (i = 1; i < argc; i++) {
-        if (argv[i][0] == '-')
-            continue;
-        if (!strcmp(argv[i], "push"))
-            return draw_push;
-        if (!strcmp(argv[i], "pull"))
-            return draw_pull;
-        if (!strcmp(argv[i], "tag"))
-            return draw_tag;
-        break;
-    }
     return draw_std;
 }
 
@@ -234,85 +218,6 @@ void draw_std(int x)
     usleep(FRAME_TIME);
 
     clear_car(x);
-}
-
-void draw_push(int x)
-{
-    /* *INDENT-OFF* */
-    move_to_top();
-    line_at(x, " ");
-    line_at(x, "   __      ,---------------.");
-    line_at(x, "  /--\\   /  /``````|``````\\\\");
-    line_at(x, "  \\__/  /  /_______|_______\\\\________");
-    line_at(x, "   ||-< |]      IVM |'       |        |]");
-    if (x % 2) {
-    line_at(x, "   ||-< =  .-:-.    |________|  .-:-.  =");
-    line_at(x, "   ||    `  -+-  --------------  -+-  '");
-    line_at(x, "   ||      '-:-'                '-:-'  ");
-    } else {
-    line_at(x, "   ||-< =  .:-:.    |________|  .:-:.  =");
-    line_at(x, "   /\\    `   X   --------------   X   '");
-    line_at(x, "  /  \\     ':-:'                ':-:'  ");
-    }
-    /* *INDENT-ON* */
-    usleep(FRAME_TIME * 10);
-
-    clear_car(x);
-}
-
-void draw_pull(int x)
-{
-    /* *INDENT-OFF* */
-    move_to_top();
-    line_at(x, " ");
-    line_at(x, "   ,---------------.               __");
-    line_at(x, "  /  /``````|``````\\\\             /--\\");
-    line_at(x, " /  /_______|_______\\\\________    \\__/");
-    line_at(x, "|]      IVM |'       |        |] >-||");
-    if (x % 2) {
-    line_at(x, "=  .-:-.    |________|  .-:-.  = >-||");
-    line_at(x, " `  -+-  --------------  -+-  '    || ");
-    line_at(x, "   '-:-'                '-:-'      ||  ");
-    } else {
-    line_at(x, "=  .:-:.    |________|  .:-:.  = >-||");
-    line_at(x, " `   X   --------------   X   '   /  \\");
-    line_at(x, "   ':-:'                ':-:'    /    \\");
-    }
-    /* *INDENT-ON* */
-    usleep(FRAME_TIME * 8);
-
-    clear_car(x);
-}
-
-void draw_tag(int iteration)
-{
-    const int car_x = 4;
-    int car_y = 0;
-    int keyframe = ((iteration + 20) / 4) % 3;
-
-    /* *INDENT-OFF* */
-    move_to_top();
-    line_at(car_x, "     ,-------------, .     ");
-    line_at(car_x, "    /     [_o_]     \\|    ");
-    line_at(car_x, " []/_________________|[]   ");
-    line_at(car_x, "  /__/_____________\\__\\  ");
-    line_at(car_x, "d|/``\\=(_)=====(_)=/``\\|b");
-    line_at(car_x, " |\\__/=============\\__/| ");
-    line_at(car_x, " \\-----|__G_T_I__|-----/  ");
-    if (keyframe == 1)
-    line_at(car_x, "  !\\/!             !\\/!");
-    else if (keyframe == 2)
-    line_at(car_x, "  ;/\\;             ;/\\;");
-    else
-    line_at(car_x, "  ||||             ||||");
-    /* *INDENT-ON* */
-    usleep(FRAME_TIME * 2);
-
-    /* clear it */
-    move_to_top();
-    for (car_y = 0; car_y < 8; car_y++) {
-        line_at(car_x, "                           ");
-    }
 }
 
 void clear_car(int x)
