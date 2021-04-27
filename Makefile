@@ -18,15 +18,15 @@ else
   endif
 endif
 
-PROG=gti$X
-MANPAGE=gti.6.gz
+PROG=ivm$X
+MANPAGE=ivm.6.gz
 
 $(PROG): *.c
 	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^
 	-$(STRIP) -s $@
 
-$(MANPAGE): gti.6
-	gzip -9 -n -c gti.6 > gti.6.gz
+$(MANPAGE): ivm.6
+	gzip -9 -n -c ivm.6 > ivm.6.gz
 
 install: $(PROG) $(MANPAGE)
 	$(INSTALL) $(PROG) $(BINDIR)/$(PROG)

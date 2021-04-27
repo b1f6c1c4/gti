@@ -3,7 +3,7 @@ Hey, I just wanted to say everything works fantastically.
 Not sure why I even opened this issue.
 
 
-I'm using `gti` on
+I'm using `ivm` on
 * [ ] HP-UX running on a 68k
 * [ ] NetBSD, with output piped to a slice of toast
 * [ ] an unreleased beta version of Windows NT 4.0 with a cmd.exe replacement from ReactOS
